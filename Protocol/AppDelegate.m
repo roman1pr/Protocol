@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "Patient.h"
+#import "Student.h"
+#import "Dancer.h"
+#import "Developer.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    Dancer *dancer1 = [[Dancer alloc] init];
+    Developer *developer1 = [[Developer alloc] init];
+    Student *student1 = [[Student alloc] init];
+    Dancer *dancer2 = [[Dancer alloc] init];
+    Student *student2 = [[Student alloc] init];
+    
+    NSArray *arr = [[NSArray alloc] initWithObjects:dancer1,developer1,student1,dancer2,student2, nil];
+    
+    dancer1.name = @"d1";
+    dancer2.name = @"d1";
+    developer1.name = @"dev1"; 
+    student1.name = @"name1";
+    student2.name = @"name2";
+    
+    
+    for (id <Patient> obj in arr) {
+        if ([obj conformsToProtocol:@protocol(Protocol)]) { // проверка подписи на прототкол
+            NSLog(@"%@", obj.name);
+            
+            if ([obj respondsToSelector:@selector(HowIsYourFather)]) { // реализован  ли протокл
+                NSLog(@"How is your Father -  \n%@", [obj HowIsYourFather]);
+            }
+            [obj areYouOk] ? [obj takePill] : [obj areYouOk] ? [obj makeShot] : 0;
+
+        }
+        
+    }
+    
     return YES;
 }
 
